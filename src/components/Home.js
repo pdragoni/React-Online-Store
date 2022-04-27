@@ -24,12 +24,21 @@ class Home extends React.Component {
     return (
       <div data-testid="home-initial-message">
         <Link
-          id="button"
           data-testid="shopping-cart-button"
           to="/cart"
         >
           Carrinho
         </Link>
+        <br />
+        <br />
+
+        <label htmlFor="button">
+          <h4>Digite algum termo de pesquisa ou escolha uma categoria.</h4>
+          <input id="button" type="text" placeholder="Insira sua busca" />
+          <button type="button">Botão</button>
+        </label>
+        <br />
+        <br />
         <section>
           {
             categorias.length > 0
@@ -44,14 +53,6 @@ class Home extends React.Component {
               ))) : null
           }
         </section>
-        <br />
-        <br />
-
-        <label htmlFor="button">
-          <input type="text" placeholder="Insira sua busca" />
-          <button type="button">Botão</button>
-        </label>
-        <h4>Digite algum termo de pesquisa ou escolha uma categoria.</h4>
       </div>
     );
   }
