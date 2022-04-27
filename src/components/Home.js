@@ -52,7 +52,7 @@ class Home extends React.Component {
     const {
       categorias,
       result,
-      busca,
+      // busca,
       produtos,
     } = this.state;
     return (
