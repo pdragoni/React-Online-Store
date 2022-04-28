@@ -31,6 +31,7 @@ class Home extends React.Component {
     // console.log(products.results);
     this.setState({
       produtos: products.results,
+      result: products.results.length,
     });
   }
 

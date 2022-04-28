@@ -3,7 +3,7 @@ import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom/cjs/react-router-dom.min';
 import Home from './components/Home';
-import Cart from './components/Cart';
+import Cart from './pages/Cart';
 
 class App extends React.Component {
   render() {
