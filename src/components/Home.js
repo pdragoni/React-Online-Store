@@ -28,7 +28,7 @@ class Home extends React.Component {
     const products = await getProductsFromCategoryAndQuery(id);
     console.log(products.results);
     this.setState({
-      produtos: products,
+      produtos: products.results,
     });
   }
 
@@ -89,7 +89,7 @@ class Home extends React.Component {
           </button>
         </label>
         { result > 0 ? (
-          categorias.map(({ title, price, thumbnail, id }) => (<Products
+          produtos.map(({ title, price, thumbnail, id }) => (<Products
             key={ id }
             title={ title }
             price={ price }
@@ -99,7 +99,13 @@ class Home extends React.Component {
         <br />
         <br />
         <section>
-          { (produtos.length === 0 ? <h4>Nenhum resultado</h4> : <p>Tem algo</p>) }
+          { (produtos.length === 0 ? <h4>Nenhum resultado</h4> : (produtos.map((prod) => (
+            <Products
+              key={ prod.id }
+              thumbnail={ prod.thumbnail }
+              title={ prod.title }
+              price={ prod.price }
+            />))))}
         </section>
         <section className="categorias">
           {
