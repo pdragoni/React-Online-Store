@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+import { getCategories,
+  getProductsFromCategoryAndQuery,
+  getProductsFromQuery } from '../services/api';
 import '../index.css';
 import Products from './Products';
 
@@ -26,7 +28,7 @@ class Home extends React.Component {
 
   byCategory = async (id) => { // pego o alvo do clique
     const products = await getProductsFromCategoryAndQuery(id);
-    console.log(products.results);
+    // console.log(products.results);
     this.setState({
       produtos: products.results,
     });
@@ -40,12 +42,12 @@ class Home extends React.Component {
 
   handleButton = async () => {
     const { busca } = this.state;
-    const produtos = await getProductsFromCategoryAndQuery(busca);
+    // console.log(busca);
+    const products = await getProductsFromQuery(busca);
     this.setState({
-      categorias: [...produtos.results],
-      result: produtos.results.length,
+      produtos: products.results,
+      result: products.results.length,
     });
-    console.log(produtos);
   }
 
   render() {
@@ -98,15 +100,6 @@ class Home extends React.Component {
         ) : <h5>Nenhum produto foi encontrado</h5>}
         <br />
         <br />
-        <section>
-          { (produtos.length === 0 ? <h4>Nenhum resultado</h4> : (produtos.map((prod) => (
-            <Products
-              key={ prod.id }
-              thumbnail={ prod.thumbnail }
-              title={ prod.title }
-              price={ prod.price }
-            />))))}
-        </section>
         <section className="categorias">
           {
             categorias.length > 0

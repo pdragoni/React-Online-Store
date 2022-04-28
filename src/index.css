@@ -54,6 +54,10 @@ code {
   font-size: 20px;
 }
 
-.produto {
-  width: 10px;
+.produto, .imagem {
+  width: 100px;
+  margin: 10px;
+  text-align: center;
+  display: flex;
+  display: inline-block;
 }

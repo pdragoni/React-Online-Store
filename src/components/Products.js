@@ -17,7 +17,7 @@ class Products extends React.Component {
         <p>
           { price }
         </p>
-        <img src={ thumbnail } alt={ title } />
+        <img src={ thumbnail } alt={ title } className="imagem" />
       </div>
     );
   }
