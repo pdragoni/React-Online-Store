@@ -28,9 +28,10 @@ class Home extends React.Component {
 
   byCategory = async (id) => { // pego o alvo do clique
     const products = await getProductsFromCategoryAndQuery(id);
-    // console.log(products.results);
+    console.log(products.results);
     this.setState({
       produtos: products.results,
+      result: products.results.length,
     });
   }
 
@@ -42,7 +43,7 @@ class Home extends React.Component {
 
   handleButton = async () => {
     const { busca } = this.state;
-    // console.log(busca);
+    console.log(busca);
     const products = await getProductsFromQuery(busca);
     this.setState({
       produtos: products.results,
