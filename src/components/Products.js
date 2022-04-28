@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../index.css';
 
 class Products extends React.Component {
   render() {
@@ -9,10 +10,10 @@ class Products extends React.Component {
       thumbnail,
     } = this.props;
     return (
-      <div data-testid="product">
-        <h2>
+      <div data-testid="product" className="produto">
+        <h4>
           { title }
-        </h2>
+        </h4>
         <p>
           { price }
         </p>
