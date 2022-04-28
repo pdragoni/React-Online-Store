@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { getCategories,
   getProductsFromCategoryAndQuery,
-  getProductsFromQuery } from '../services/api';
+  getProductsFromQuery,
+  getProductsDetails } from '../services/api';
 import '../index.css';
 import Products from './Products';
 
@@ -51,11 +52,15 @@ class Home extends React.Component {
     });
   }
 
+  details = async (id) => { // FUNÇÃO NÃO FINALIZADA
+    const detalhes = await getProductsDetails(id);
+    console.log(detalhes);
+  }
+
   render() {
     const {
       categorias,
       result,
-      // busca,
       produtos,
     } = this.state;
     return (
@@ -92,12 +97,16 @@ class Home extends React.Component {
           </button>
         </label>
         { result > 0 ? (
-          produtos.map(({ title, price, thumbnail, id }) => (<Products
-            key={ id }
-            title={ title }
-            price={ price }
-            thumbnail={ thumbnail }
-          />))
+          produtos.map(({ title, price, thumbnail, id }) => (
+            <Products
+              key={ id }
+              id={ id } // EDIÇÃO REVISÁVEL
+              title={ title }
+              price={ price }
+              thumbnail={ thumbnail }
+              onClick={ () => this.details(id) } // requisição pra api usando esse id - EDIÇÃO REVISÁVEL
+            />
+          ))
         ) : <h5>Nenhum produto foi encontrado</h5>}
         <br />
         <br />

@@ -7,6 +7,7 @@ const fetchUrl = async (url) => {
 const CATEGORY_ENDPOINT = 'https://api.mercadolibre.com/sites/MLB/categories';
 const SEARCH_ENDPOINT = 'https://api.mercadolibre.com/sites/MLB/search';
 const QUERY_ENDPOINT = 'https://api.mercadolibre.com/sites/MLB/search?q=';
+const PRODUCT_ENDPOINT = 'https://api.mercadolibre.com/items/';
 
 // Essa função funciona buscando as categorias
 export async function getCategories() {
@@ -33,6 +34,12 @@ export async function getProductsFromQuery(categoryId, query) {
   if (query) params.set('query', query);
 
   const products = await fetchUrl(`${QUERY_ENDPOINT}?${params.toString()}`);
+
+  return products;
+}
+
+export async function getProductsDetails(id) {
+  const products = await fetchUrl(`${PRODUCT_ENDPOINT}${id}`);
 
   return products;
 }
