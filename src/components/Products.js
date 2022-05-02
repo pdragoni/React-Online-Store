@@ -11,6 +11,8 @@ class Products extends React.Component {
       price,
       thumbnail,
       id,
+      addCarrinho,
+      object,
     } = this.props;
     return (
       <div data-testid="product" className="produto">
@@ -20,24 +22,32 @@ class Products extends React.Component {
           Component={ Details }
           data-testid="product-detail-link"
         >
-          <h4>
+          <span data-testid="product-detail-name">
             { title }
-          </h4>
+          </span>
           <p>
             { price }
           </p>
           <img src={ thumbnail } alt={ title } className="imagem" />
         </Link>
+        <button
+          type="button"
+          data-testid="product-add-to-cart"
+          onClick={ () => addCarrinho(object) }
+        >
+          Incluir Produto
+        </button>
       </div>
     );
   }
 }
-
 Products.propTypes = {
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   thumbnail: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  addCarrinho: PropTypes.string.isRequired,
+  object: PropTypes.string.isRequired,
 };
 
 export default Products;

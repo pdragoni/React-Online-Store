@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { getCategories,
   getProductsFromCategoryAndQuery,
   getProductsFromQuery,
@@ -10,7 +11,6 @@ import Products from './Products';
 class Home extends React.Component {
   constructor() {
     super();
-
     this.state = {
       categorias: [],
       produtos: [],
@@ -29,7 +29,6 @@ class Home extends React.Component {
 
   byCategory = async (id) => { // pego o alvo do clique
     const products = await getProductsFromCategoryAndQuery(id);
-    console.log(products.results);
     this.setState({
       produtos: products.results,
       result: products.results.length,
@@ -63,6 +62,9 @@ class Home extends React.Component {
       result,
       produtos,
     } = this.state;
+
+    const { addCarrinho } = this.props;
+
     return (
       <div data-testid="home-initial-message">
         <Link
@@ -97,14 +99,16 @@ class Home extends React.Component {
           </button>
         </label>
         { result > 0 ? (
-          produtos.map(({ title, price, thumbnail, id }) => (
+          produtos.map((element) => (
             <Products
-              key={ id }
-              id={ id } // EDIÇÃO REVISÁVEL
-              title={ title }
-              price={ price }
-              thumbnail={ thumbnail }
-              onClick={ () => this.details(id) } // requisição pra api usando esse id - EDIÇÃO REVISÁVEL
+              key={ element.id }
+              id={ element.id } // EDIÇÃO REVISÁVEL
+              title={ element.title }
+              price={ element.price }
+              thumbnail={ element.thumbnail }
+              addCarrinho={ addCarrinho }
+              object={ element }
+              onClick={ () => this.details(element.id) }
             />
           ))
         ) : <h5>Nenhum produto foi encontrado</h5>}
@@ -130,5 +134,9 @@ class Home extends React.Component {
     );
   }
 }
+
+Home.propTypes = {
+  addCarrinho: PropTypes.func.isRequired,
+};
 
 export default Home;

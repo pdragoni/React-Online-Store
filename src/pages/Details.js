@@ -1,27 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-// import { getProductsDetails } from '../services/api';
+import { useParams, Link } from 'react-router-dom';
+import { getProductsDetails } from '../services/api';
 
-class Details extends React.Component {
-  // async componentDidMount() {
-  //   const detalhes = await getProductsDetails();
-  //   console.log(detalhes);
-  // }
+export default function Details({ addCarrinho }) {
+  const [productDetails, setProductDetails] = useState([]);
+  const params = useParams();
+  useEffect(() => {
+    getProductsDetails(params.id)
+      .then((result) => setProductDetails(result))
+      .catch((error) => console.log(error));
+  }, [params.id]);
+  return (
+    <div>
+      <header>
+        <Link
+          className="carrinho"
+          data-testid="shopping-cart-button"
+          to="/cart"
+        >
+          <button type="button">Ir para Carrinho</button>
+        </Link>
+      </header>
+      <h6 data-testid="product-detail-name">{ productDetails.title }</h6>
+      <img alt="thumbnail" src={ productDetails.thumbnail } />
+      <h4>{ productDetails.price }</h4>
+      <h4>{ productDetails.id }</h4>
 
-  render() {
-    const {
-      title,
-    } = this.props;
-    return (
-      <div>
-        <h1 data-testid="product-detail-name">{ title }</h1>
-      </div>
-    );
-  }
+      <button
+        type="button"
+        data-testid="product-detail-add-to-cart"
+        onClick={ () => addCarrinho(productDetails) }
+      >
+        Incluir Produto
+      </button>
+    </div>
+  );
 }
 
 Details.propTypes = {
-  title: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  addCarrinho: PropTypes.func.isRequired,
 };
-
-export default Details;
