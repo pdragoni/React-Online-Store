@@ -13,13 +13,16 @@ class Products extends React.Component {
       id,
       addCarrinho,
       object,
+      idFilter,
     } = this.props;
+
     return (
       <div data-testid="product" className="produto">
         <Link
           to={ `/details/${id}` }
           title={ title }
           Component={ Details }
+          idFilter={ idFilter }
           data-testid="product-detail-link"
         >
           <span data-testid="product-detail-name">
@@ -46,8 +49,14 @@ Products.propTypes = {
   price: PropTypes.number.isRequired,
   thumbnail: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  addCarrinho: PropTypes.string.isRequired,
-  object: PropTypes.string.isRequired,
+  addCarrinho: PropTypes.func.isRequired,
+  idFilter: PropTypes.func.isRequired,
+  object: PropTypes.shape({
+    id: PropTypes.string,
+    title: PropTypes.string,
+    thumbnail: PropTypes.string,
+    price: PropTypes.number,
+  }).isRequired,
 };
 
 export default Products;
