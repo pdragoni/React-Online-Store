@@ -63,7 +63,7 @@ class Home extends React.Component {
       produtos,
     } = this.state;
 
-    const { addCarrinho } = this.props;
+    const { addCarrinho, idFilter } = this.props;
 
     return (
       <div data-testid="home-initial-message">
@@ -102,12 +102,13 @@ class Home extends React.Component {
           produtos.map((element) => (
             <Products
               key={ element.id }
-              id={ element.id } // EDIÇÃO REVISÁVEL
+              id={ element.id }
               title={ element.title }
               price={ element.price }
               thumbnail={ element.thumbnail }
               addCarrinho={ addCarrinho }
               object={ element }
+              idFilter={ idFilter }
               onClick={ () => this.details(element.id) }
             />
           ))
@@ -137,6 +138,7 @@ class Home extends React.Component {
 
 Home.propTypes = {
   addCarrinho: PropTypes.func.isRequired,
+  idFilter: PropTypes.func.isRequired,
 };
 
 export default Home;
