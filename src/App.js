@@ -11,7 +11,7 @@ function App() {
   const addCarrinho = (param) => setIncluirCarrinho([...incluirCarrinho, param]);
 
   useEffect(() => {
-    console.log(incluirCarrinho);
+    // console.log(incluirCarrinho);
   }, [incluirCarrinho]);
 
   return (

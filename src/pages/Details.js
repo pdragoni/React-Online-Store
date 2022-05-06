@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useParams, Link } from 'react-router-dom';
 import { getProductsDetails } from '../services/api';
+import Reviews from '../components/Reviews';
 
 export default function Details({ addCarrinho }) {
   const [productDetails, setProductDetails] = useState([]);
@@ -34,6 +35,7 @@ export default function Details({ addCarrinho }) {
       >
         Incluir Produto
       </button>
+      <Reviews />
     </div>
   );
 }
