@@ -29,7 +29,7 @@ function App() {
   }, [idProducts]);
 
   useEffect(() => {
-    console.log(incluirCarrinho);
+    // console.log(incluirCarrinho);
   }, [incluirCarrinho]);
 
   return (
