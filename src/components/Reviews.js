@@ -1,5 +1,6 @@
 import React from 'react';
 import CardReview from './cardReview';
+// APAGAR ESTA LINHA AO BAIXAR
 
 class Reviews extends React.Component {
   constructor() {
