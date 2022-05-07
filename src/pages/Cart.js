@@ -1,37 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { useParams } from 'react-router-dom';
-import { getProductsDetails } from '../services/api';
 
-export default function Cart({ incluirCarrinho, idProducts, addCarrinho }) {
+export default function Cart(
+  { incluirCarrinho, idProducts, updateCartAdd, updateCartSub },
+) {
   const cart = incluirCarrinho;
   console.log(cart);
-
-  const [somatorio, setSomatorio] = useState([]);
-  const params = useParams();
-  useEffect(() => {
-    getProductsDetails(params.id)
-      .then((result) => setSomatorio(result))
-      .catch((error) => console.log(error));
-  }, [params.id]);
-
-  /*
-  this.state= {
-    contador: '',     ===============>>>>>>>>>>>>>>>      { `Quantidade: ${idProducts[item.id]}` }
-  };
-  changeResult = (operacao) => {
-    const { contador } = this.state;
-    if (operacao === 'soma') {
-      this.setState({
-        contador: contador + 1,
-      });
-    }
-    if (operacao === 'subtracao') {
-      thiis.setState({
-        contador: contador - 1,
-      });
-    }
-*/
 
   return (
     <div>
@@ -45,7 +19,7 @@ export default function Cart({ incluirCarrinho, idProducts, addCarrinho }) {
             <h2 data-testid="shopping-cart-product-name">{item.title}</h2>
             <button
               type="button"
-              onClick={ () => console.log('subtracao') }
+              onClick={ () => updateCartSub(idProducts, item.id) }
               data-testid="product-decrease-quantity"
             >
               -
@@ -60,7 +34,7 @@ export default function Cart({ incluirCarrinho, idProducts, addCarrinho }) {
             </p>
             <button
               type="button"
-              onClick={ () => addCarrinho(somatorio) }
+              onClick={ () => updateCartAdd(idProducts, item.id) }
               data-testid="product-increase-quantity"
             >
               +
@@ -99,5 +73,6 @@ Cart.propTypes = {
   idProducts: PropTypes.shape({
     id: PropTypes.oneOfType(PropTypes.array, PropTypes.number).isRequired,
   }).isRequired,
-  addCarrinho: PropTypes.func.isRequired,
+  updateCartAdd: PropTypes.func.isRequired,
+  updateCartSub: PropTypes.func.isRequired,
 };
