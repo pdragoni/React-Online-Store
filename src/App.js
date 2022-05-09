@@ -1,15 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { Route, Switch } from 'react-router-dom';
-import { BrowserRouter } from 'react-router-dom/cjs/react-router-dom.min';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './components/Home';
 import Cart from './pages/Cart';
 import Details from './pages/Details';
 
 function App() {
   const [incluirCarrinho, setIncluirCarrinho] = useState([]);
-  // const [carrinhoUnico, setCarrinhoUnico] = useState([]);
   const [idProducts, setIdProducts] = useState({});
+  // botão + e -
+  const updateCartAdd = (products, id) => {
+    console.log(products[id]);
+    console.log(id);
+    setIdProducts({ ...idProducts, [id]: products[id] + 1 });
+  };
+
+  const updateCartSub = (products, id) => setIdProducts(
+    { ...idProducts, [id]: products[id] - 1 },
+  );
 
   const idFilter = (paramId) => {
     const result = incluirCarrinho.filter((item) => item.id === paramId);
@@ -20,6 +28,7 @@ function App() {
   };
 
   const addCarrinho = (param) => {
+    console.log(param);
     setIncluirCarrinho([...incluirCarrinho, param]);
     idFilter(param.id);
   };
@@ -50,6 +59,8 @@ function App() {
             render={ () => (<Cart
               incluirCarrinho={ incluirCarrinho }
               idFilter={ idFilter }
+              updateCartSub={ updateCartSub }
+              updateCartAdd={ updateCartAdd }
               idProducts={ idProducts }
             />) }
           />

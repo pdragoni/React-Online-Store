@@ -117,7 +117,7 @@ class Home extends React.Component {
         <br />
         <section className="categorias">
           {
-            categorias.length > 0
+            categorias?.length > 0
               ? (categorias.map((cat) => (
                 <button
                   className="category"
